@@ -17,12 +17,15 @@ var deck = {
       temp.splice(n, 1);
     }
     console.log("The deck has been shuffled.");
-  }, draw: function () {
+  }, draw: function (number = 1) {
+    var temp = [];
+    for (var i = 0; i < number && this.cards.length > 0; i++)
+      temp.push(this.cards.pop());
     if (this.cards.length > 1)
       console.log("The deck now has " + (this.cards.length - 1) + " cards.");
     else
       console.log("The deck is now empty.");
-    return this.cards.pop();
+    return temp.length == 1 ? temp[0] : temp;
   }
 };
 
@@ -36,7 +39,3 @@ var card = {
 }
 
 deck.shuffle();
-
-for (var i in deck.cards) {
-  document.getElementById("cards").innerHTML += "<div class='card' style='color: " + card.color(deck.cards[i]) + "'>" + card.label(deck.cards[i]) + "</div>";
-}
