@@ -10,8 +10,7 @@ var Deck = function (suits, numbers, decks = 1) {
     unshuffled[i] = i;
   
   for (var i = 0; i < this.total; i++) {
-    var n = Math.floor(Math.random() * (i));
-    this.cards.push(unshuffled[n]);
+    var n = Math.floor(Math.random() * (unshuffled.length - i));
     this.cards.push(unshuffled[n]);
     unshuffled[n] = unshuffled.pop();
     unshuffled.push(this.cards[i]);
