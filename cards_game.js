@@ -1,11 +1,4 @@
-var rows = [
-	[],
-	[],
-	[],
-	[],
-	[],
-	[]
-];
+var rows = [];
 
 var move = function (card0, row0, row1) {
 	rows[row1] = rows[row1].concat(rows[row0].splice(card0, 1));
@@ -19,12 +12,14 @@ var discard = function (card, row) {
 	rows[row].splice(card, 1);
 }
 
-var clear = function (levels) {
+var clear = function (levels = 1) {
 	rows = [];
 	bin = [];
 	for (var i = 0; i < levels; i++)
 		rows[i] = [];
 }
+
+clear(7);
 
 window.setInterval(function () {
 	var t = "";
@@ -32,7 +27,7 @@ window.setInterval(function () {
 		t += "<div class='row'>";
 		for (var j in rows[i]) {
 			t +=
-				"<div class='card'><span style='color: grey'>(" + j + ")</span> <span style='color: " + card.color(rows[i][j]) + "'>"
+				"<div class='card'><span>" + j + "</span> <span style='color: " + card.color(rows[i][j]) + "'>"
 				+ card.label(rows[i][j]) + "</div>";
 		}
 		t += "</div>";

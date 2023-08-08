@@ -4,13 +4,10 @@ body {
 }
 
 .row {
-  height: 100px;
+  height: 95px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid MediumSeaGreen;
-  margin: 5px;
-  padding: 5px;
 }
 
 .card {
@@ -19,9 +16,21 @@ body {
   padding: 5px;
   border-radius: 3px;
   display: inline-block;
-  width: 55px;
-  height: 80px;
+  width: 50px;
+  height: 70px;
   box-shadow: 0 1px 3px black;
+  text-align: center;
+}
+
+.card span {
+  display: block;
+  margin-bottom: 10px;
+  font-size: larger;
+  color: grey;
+}
+
+.card span:first-child {
+  font-size: smaller;
 }
 
 .cover {
