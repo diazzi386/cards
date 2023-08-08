@@ -1,0 +1,20 @@
+body {
+  background-color: SeaGreen;
+  font-family: "Roboto", sans-serif;
+}
+
+.card {
+  background-color: white;
+  margin: 10px;
+  padding: 5px;
+  border-radius: 3px;
+  display: inline-block;
+  width: 55px;
+  height: 80px;
+  box-shadow: 0 1px 3px black;
+}
+
+.cover {
+  font-size: 0;
+  background-color: DarkSlateBlue;
+}
