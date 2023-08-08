@@ -1,29 +1,29 @@
-var Deck = function (suits, numbers, decks = 1) {
-  this.suits = suits;
-  this.numbers = numbers;
-  this.decks = decks;
-  this.total = this.suits.length * this.numbers.length * this.decks.length;
-  this.cards = [];
-
-  var unshuffled = [];
-  for (var i = 0; i < this.total; i++)
-    unshuffled[i] = i;
-
-  console.log(this.cards, unshuffled);
+// Change here deck specs
+var Deck = {
+  suits: ["♠", "♥", "♣", "♦"],
+  numbers: ["A", 2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K"],
+  decks: 1,
+  cards: [],
+  shuffle: function () {
+    var temp = [];
+    for (var i = 0; i < this.suits * this.numbers * this.decks; i++)
+      temp.push(i % (this.suits * this.numbers));
+    
+    cards = [];
+    for (var i = 0; i < this.suits * this.numbers * this.decks; i++) {
+      var n = Math.floor(Math.random() * temp.length);
+      this.cards.push(temp[n]);
+      temp.splice(n, 1);
+    }
   
-  for (var i = 0; i < this.total; i++) {
-    var n = Math.floor(Math.random() * (unshuffled.length - i));
-    this.cards.push(unshuffled[n]);
-    unshuffled[n] = unshuffled.pop();
-    unshuffled.push(this.cards[i]);
+    console.log("The deck has been shuffled.");
+  }, draw: function () {
+    if (this.cards.length > 1)
+      console.log("The deck now has " + (this.cards.length - 1) + " cards.");
+    else
+      console.log("The deck is now empty.");
+    return this.cards.pop();
   }
-  
-  console.log(this.cards, unshuffled);
+};
 
-  this.draw = function () {
-  }
-
-  return this;
-}
-
-var deck = new Deck(["♠", "♥", "♣", "♦"], ["A", 2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K"]);
+Deck.shuffle();
