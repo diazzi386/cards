@@ -1,0 +1,29 @@
+body {
+	background-color: black;
+	color: white;
+	font-family: sans-serif;
+	margin: 20px
+}
+
+a {
+	color: white;
+	font-weight: bold;
+	position: relative;
+	padding: 10px 20px;
+	border: 2px solid white;
+	border-radius: 15px;
+	text-decoration: none;
+}
+
+a:hover {
+	color: black;
+	background-color: white;
+}
+
+ul {
+	margin-top: 25px;
+}
+
+canvas {
+	border: 1px solid red;
+}
