@@ -1,0 +1,39 @@
+body {
+  background-color: SeaGreen;
+  font-family: "Roboto", sans-serif;
+}
+
+.row {
+  height: 95px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  background-color: white;
+  margin: 10px;
+  padding: 5px;
+  border-radius: 3px;
+  display: inline-block;
+  width: 50px;
+  height: 70px;
+  box-shadow: 0 1px 3px black;
+  text-align: center;
+}
+
+.card span {
+  display: block;
+  margin-bottom: 10px;
+  font-size: larger;
+  color: grey;
+}
+
+.card span:first-child {
+  font-size: smaller;
+}
+
+.cover {
+  font-size: 0;
+  background-color: DarkSlateBlue;
+}
