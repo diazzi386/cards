@@ -17,21 +17,11 @@ var deck = {
       this.cards.push(temp[n]);
       temp.splice(n, 1);
     }
-    console.log("The deck has been shuffled.");
-  }, draw: function () {
-    return this.cards.pop();
-  }, drawMore: function (number = 1) {
+  }, draw: function (number = 1) {
     var temp = [];
     for (var i = 0; i < number && this.cards.length > 0; i++)
-      temp.push(this.draw());
+      temp.push(this.cards.pop());
     return temp;
-  }, count: function () {
-    if (this.cards.length > 1)
-      console.log("The deck now has " + this.cards.length + " cards.");
-    else if (this.cards.length == 1)
-      console.log("The deck now has 1 card.");
-    else
-      console.log("The deck is now empty.");
   }
 };
 
@@ -65,9 +55,50 @@ var start = function () {
   player = first = 0;
   winner = -1;
   for (var i = 0; i < players; i++) {
-    score[i] = 10;
-    hands[i] = deck.drawMore(3);
+    score[i] = 20;
+    hands[i] = deck.draw(5);
   }
+}
+
+var play = function (c) {
+  if (winner > -1)
+    return;
+  if (c < 0 || c >= hands[player].length)
+    return console.log("Sorry, what card do you want to play?");
+  if (c >= 0 && c < hands[player].length)
+    played.push(hands[player].splice(c, 1));
+  // If end of turn
+  if (c == undefined || (player + 1) % players == first) {
+    // Apply damage
+    var damage = 0;
+    for (var i in played)
+      damage += card.value(played[i]) * card.type(played[i]);
+    score[player] -= Math.max(0, damage);
+    // Check for end of game
+    if (score[player] <= 0) {
+      return end(first);
+    }
+    if (deck.cards.length <= 0) {
+      for (var i in hands) {
+        if (hands[i].length <= 0) {
+          return end(score.indexOf(Math.max(...score)));
+        }
+      }
+    }
+    // Next turn if the game is still on
+    first = (first + 1) % players;
+    player = first;
+    turn = turn + 1;
+    played = [];
+  } else {
+    // Next player
+    player = (player + 1) % players;
+  }
+
+  if (turn > 0 && deck.cards.length > 0)
+    hands[player] = hands[player].concat(deck.draw());
+
+  print();
 }
 
 var print = function () {
@@ -88,29 +119,11 @@ var print = function () {
   return console.log("What card do you want to play?");
 }
 
-var play = function (c) {
-  if (winner > -1)
-    return console.log("The winner is player no. " + winner)
-  if (c == undefined || c < 0 || c >= hands[player].length)
-    return console.log("Sorry, what card do you want to play?");
-  played.push(hands[player].splice(c, 1));
-
-  if ((player + 1) % players == first) {
-    var damage = 0;
-    for (var i in played)
-      damage += card.value(played[i]) * card.type(played[i]);
-    score[player] -= Math.min(0, damage);
-    first = (first + 1) % players;
-    player = first;
-    turn = turn + 1;
-    played = [];
-  } else {
-    player = (player + 1) % players;
-  }
-
-  hands[player].push(deck.draw());
-
-  print();
+var end = function (w) {
+  winner = w;
+  console.log("Congratulations!");
+  console.log("The winner is player no. " + winner);
+  return winner;
 }
 
 start();
